@@ -46,6 +46,9 @@ def get_page_link(url_category, number_page):
     return page_link
 
 cat_link_num = [{'link': link, 'number': number} for link, number in zip(url_categories, number_pages)]
-# print(cat_link_num)
 
+n =2
+link_page = cat_link_num[1]['link'] +  '/' + f'page-{n}'
+print(link_page)
 
+for cat_link in cat_link_num:
