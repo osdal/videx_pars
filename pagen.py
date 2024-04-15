@@ -23,6 +23,7 @@ def get_categoty_up_link(dom):
         category_up_links = [url + link.get('href') for link in category_up_link]
     return category_up_links
 
+
 def get_number_pages(dom_category):
     number_pages_block = dom_category.xpath("//ul[contains(@class, 'pagination')]//"
                                             "li[not(descendant::span)]/a/text()")
@@ -30,6 +31,7 @@ def get_number_pages(dom_category):
     print('Categoty ' + url_category + ' include ' + num_pages)
     number_pages.append(num_pages)
     return number_pages
+
 
 number_pages = []
 url_categories = get_categoty_up_link(dom)
@@ -41,14 +43,18 @@ for url_category in url_categories:
     dom_category = etree.HTML(str(soup_category))
     number_pages = get_number_pages(dom_category)
 
+
 def get_page_link(url_category, number_page):
     page_link = url_category + f'/page-{number_page}'
     return page_link
 
+
 cat_link_num = [{'link': link, 'number': number} for link, number in zip(url_categories, number_pages)]
 
-n =2
-link_page = cat_link_num[1]['link'] +  '/' + f'page-{n}'
-print(link_page)
-
-for cat_link in cat_link_num:
+link_page_list = []
+for i in range(0, len(cat_link_num)):
+    link_page_root = cat_link_num[i]['link']
+    for n in range(1, int(cat_link_num[i]['number']) + 1):
+        link_page = link_page_root + f'/page-{n}'
+        link_page_list.append(link_page)
+print(link_page_list)
