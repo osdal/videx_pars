@@ -71,7 +71,7 @@ print(link_page_list)
 # ]
 link_page_list
 # Укажите путь к файлу CSV
-csv_file_path = 'link_page_list.csv'
+csv_file_path = './DATA/link_page_list.csv'
 
 # Записываем данные в файл CSV
 with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:

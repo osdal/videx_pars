@@ -75,7 +75,7 @@ def get_categories():
 
 # headers = cat_up_level
 df = pd.DataFrame(get_categories())
-df.to_csv('category.csv')
+df.to_csv('./DATA/category.csv')
 
 
 def download_img(url):

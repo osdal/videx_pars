@@ -70,5 +70,5 @@ for p in range(1, 5):
 
 header = ['Link', 'Title', 'Image', 'Price']
 df = pd.DataFrame(data, columns=header)
-df.to_csv('books.csv')
+df.to_csv('./DATA/books.csv')
 print(data)
