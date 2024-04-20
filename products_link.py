@@ -25,3 +25,10 @@ headers = {
 url = page_links[0]
 print(url)
 response = requests.get(url, headers=headers)
+html = response.text
+soup = bs(html, 'html.parser')
+
+dom = etree.HTML(str(soup))
+
+product_links = dom.xpath("//div[@clas='products_container']//a[@class='preview_image']/@href")
+print(len(product_links))
