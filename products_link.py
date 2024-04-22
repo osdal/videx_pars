@@ -2,6 +2,7 @@ import csv
 import requests
 from bs4 import BeautifulSoup as bs
 from lxml import etree
+import time
 
 csv_file_path = './DATA/link_page_list.csv'
 
@@ -22,15 +23,24 @@ headers = {
                   'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36'
 }
 
-url = page_links[0]
-print(url)
-response = requests.get(url, headers=headers)
-html = response.text
-soup = bs(html, 'html.parser')
+for link in page_links:
+    url = link
+    response = requests.get(url, headers=headers)
+    html = response.text
+    soup = bs(html, 'html.parser')
 
-dom = etree.HTML(str(soup))
+    dom = etree.HTML(str(soup))
 
-product_links = dom.xpath("//div[@class='products_container']//a[@class='preview_image']/@href")
+    product_links = dom.xpath("//div[@class='products_container']//a[@class='preview_image']/@href")
 
+    prod_links = ['https://videx.ua/' + link for link in product_links]
 
-print(len(product_links))
+    csv_file_path = './DATA/products_link.csv'
+    # Записываем данные в файл CSV
+    with open(csv_file_path, 'a', newline='', encoding='utf-8') as csv_file:
+        writer = csv.writer(csv_file)
+        for item in prod_links:
+            writer.writerow([item])
+            time.sleep(1)
+
+print(len(prod_links))
