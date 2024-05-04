@@ -3,6 +3,7 @@ import requests
 from bs4 import BeautifulSoup as bs
 from lxml import etree
 import time
+import random
 
 csv_file_path = './DATA/link_page_list.csv'
 
@@ -41,6 +42,11 @@ for link in page_links:
         writer = csv.writer(csv_file)
         for item in prod_links:
             writer.writerow([item])
-            time.sleep(1)
+            # Выбираем случайное число из диапазона от 5 до 20
+            delay = random.randint(5, 20)
+
+            # Создаем задержку
+            print(f"Задержка: {delay} секунд")
+            time.sleep(delay)
 
 print(len(prod_links))
